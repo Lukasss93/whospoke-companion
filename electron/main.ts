@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, screen, shell } from 'electron';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -45,6 +45,7 @@ function createWindow() {
     webPreferences: {
       //devTools: false,
       preload: path.join(__dirname, 'preload.mjs'),
+      nodeIntegration: true,
     },
   })
 
@@ -64,6 +65,11 @@ function createWindow() {
   win.setAlwaysOnTop(true, 'screen-saver', 1);
 
   win.removeMenu();
+
+  win.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith('https:')) shell.openExternal(url)
+    return { action: 'deny' }
+  })
 
   win.webContents.openDevTools()
 }
