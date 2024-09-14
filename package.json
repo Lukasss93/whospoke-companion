@@ -1,7 +1,9 @@
 {
   "name": "whospoke-companion",
+  "description": "A Who Spoke companion app",
   "private": true,
-  "version": "0.0.0",
+  "author": "Lukasss93",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
