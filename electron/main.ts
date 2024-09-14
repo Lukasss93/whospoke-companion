@@ -31,16 +31,18 @@ function createWindow() {
   let display = screen.getPrimaryDisplay();
 
   let width = 300;
-  let height = 400;
+  let height = 500;
 
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'logo.ico'),
     width: width,
     height: height,
+    maxWidth: width,
+    minHeight: height,
     x: display.bounds.width - (width + 30),
     y: 160,
     maximizable: false,
-    resizable: false,
+    //resizable: false,
     useContentSize: true,
     webPreferences: {
       //devTools: false,
@@ -71,7 +73,7 @@ function createWindow() {
     return { action: 'deny' }
   })
 
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools()
 }
 
 // Quit when all windows are closed, except on macOS. There, it's common
