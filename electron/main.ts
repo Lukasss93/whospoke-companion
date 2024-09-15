@@ -67,8 +67,6 @@ function createWindow() {
     win.setVisibleOnAllWorkspaces(true, {visibleOnFullScreen: true});
     win.setAlwaysOnTop(true, 'screen-saver', 1);
 
-    //win.removeMenu();
-
     win.webContents.setWindowOpenHandler(({url}) => {
         if (url.startsWith('https:')) shell.openExternal(url)
         return {action: 'deny'}
@@ -139,6 +137,10 @@ const template = [
             {
                 label: 'Ricarica',
                 role: 'reload',
+            },
+            {
+                label: 'Developer Tools',
+                role: 'toggleDevTools',
             }
         ]
     },
