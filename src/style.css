@@ -12,16 +12,9 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
 #app {
   margin: 0 auto;
-  text-align: center;
-}
-
-img{
-  display: inline-block;
 }
