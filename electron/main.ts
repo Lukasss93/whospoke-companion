@@ -1,4 +1,4 @@
-import {app, BrowserWindow, screen, shell, Menu, dialog} from 'electron';
+import {app, BrowserWindow, screen, shell, Menu, dialog, ipcMain} from 'electron';
 import {createRequire} from 'node:module';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
@@ -95,6 +95,19 @@ app.on('activate', () => {
 
 app.whenReady().then(createWindow)
 
+function showMainWindow() {
+    if (VITE_DEV_SERVER_URL) {
+        win?.loadURL(VITE_DEV_SERVER_URL)
+    } else {
+        // win.loadFile('dist/index.html')
+        win?.loadFile(path.join(RENDERER_DIST, 'index.html'))
+    }
+}
+
+ipcMain.on('message:showMainWindow', (event) => {
+    showMainWindow();
+});
+
 const isMac = process.platform === 'darwin';
 
 const template = [
@@ -104,8 +117,12 @@ const template = [
             {
                 label: 'Torna nella Home',
                 click: () => {
-                    win?.webContents.goBack();
+                    showMainWindow();
                 },
+            },
+            {
+                label: 'Ricarica',
+                role: 'reload',
             },
             {
                 label: 'Informazioni',
@@ -122,25 +139,6 @@ const template = [
             {
                 label: isMac ? 'Chiudi' : 'Esci',
                 role: isMac ? 'close' : 'quit',
-            }
-        ]
-    },
-    {
-        label: 'Strumenti',
-        submenu: [
-            {
-                label: 'Impostazioni',
-                click: () => {
-                    win?.webContents.send('changeRouteTo', '/settings');
-                },
-            },
-            {
-                label: 'Ricarica',
-                role: 'reload',
-            },
-            {
-                label: 'Developer Tools',
-                role: 'toggleDevTools',
             }
         ]
     },
