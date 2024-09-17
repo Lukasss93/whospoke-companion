@@ -41,6 +41,7 @@
       "AppImage"
     ],
     "artifactName": "${productName}-Linux-${version}.${ext}",
-    "icon": "public/logo.ico"
+    "icon": "public/logo.png",
+    "category": "Utility"
   }
 }

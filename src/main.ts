@@ -2,6 +2,7 @@ import {createApp} from 'vue';
 import './style.scss';
 import App from './App.vue';
 import PrimeVue from 'primevue/config';
+// @ts-ignore
 import Aura from '@/presets/aura';
 
 createApp(App)

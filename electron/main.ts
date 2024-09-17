@@ -104,9 +104,7 @@ function showMainWindow() {
     }
 }
 
-ipcMain.on('message:showMainWindow', (event) => {
-    showMainWindow();
-});
+ipcMain.on('message:showMainWindow', () => showMainWindow());
 
 const isMac = process.platform === 'darwin';
 
@@ -144,5 +142,6 @@ const template = [
     },
 ];
 
+// @ts-ignore
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);
