@@ -142,6 +142,6 @@ const template = [
     },
 ];
 
-// @ts-ignore
+//@ts-ignore
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);
